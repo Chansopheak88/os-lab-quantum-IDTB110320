@@ -1,0 +1,11 @@
+Run 1: 14
+Run 2: 22
+Run 3: 8
+Run 4: 18
+Run 5: 10
+
+The inventory number changes each run because multiple bot processes simultaneously
+read the same inventory value before any of them writes the updated value back.
+This is a TOC-TOU (Time-of-Check to Time-of-Use) race condition — the OS scheduler
+runs processes in a non-deterministic order, so different numbers of bots "win"
+the race each time, causing inconsistent results.
